@@ -1,5 +1,7 @@
 import React, { use, useState } from "react";
+import { useContext } from "react";
 import { useLoaderData, useParams } from "react-router";
+import { BookContext } from "../../context/BookContext";
 
 // const booksPromise = fetch("/booksData.json").then((res) => res.json());
 
@@ -27,26 +29,8 @@ const BookDetails = () => {
     yearOfPublishing,
   } = expectedBook;
 
-  const [storedBooks, setStoredBooks] = useState([]);
-
-  const handleMarkasRead = (currentBook) => {
-    // step 1: store book id
-    // step 2: where to store
-    // step 2: array or collection
-    // step 3: If the book is already exist then show a alert or toast
-    // step 4: if not then add the book in the array or collection
-    console.log(expectedBook, " ");
-
-    const isExistBook = storedBooks.find(
-      (book) => book.bookId === currentBook.bookId,
-    );
-
-    if (isExistBook) {
-      alert("The Book is already exist");
-    } else {
-      setStoredBooks([...storedBooks, currentBook]);
-    }
-  };
+  const { handleMarkasRead, storedBooks } = useContext(BookContext);
+  // console.log(handleMarkasRead, storedBooks, "bookContext");
 
   return (
     <div className="mt-10 card lg:card-side bg-base-100 shadow-sm container mx-auto">
