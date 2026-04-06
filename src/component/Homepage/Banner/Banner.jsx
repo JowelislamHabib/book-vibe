@@ -1,5 +1,5 @@
 import React from "react";
-import heroBook from "../../assets/pngwing 1.png";
+import heroBook from "../../../assets/pngwing 1.png";
 
 const Banner = () => {
   return (
