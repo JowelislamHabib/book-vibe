@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { toast } from "react-toastify";
 
 export const BookContext = createContext();
 
@@ -17,10 +18,10 @@ const BookProvider = ({ children }) => {
     );
 
     if (isExistBook) {
-      alert("The Book is already exist");
+      toast.error("The Book is already exist");
     } else {
       setStoredBooks([...storedBooks, currentBook]);
-      alert(`${currentBook.bookName} has been added to read list`);
+      toast.success(`${currentBook.bookName} has been added to read list`);
     }
   };
 
