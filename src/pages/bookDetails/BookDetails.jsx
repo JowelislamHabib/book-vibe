@@ -1,11 +1,10 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
 
 // const booksPromise = fetch("/booksData.json").then((res) => res.json());
 
 const BookDetails = () => {
   const { bookId: bookParamsId } = useParams();
-  console.log(bookParamsId);
 
   const books = useLoaderData();
 
@@ -13,7 +12,6 @@ const BookDetails = () => {
   //   console.log(books);
 
   const expectedBook = books.find((book) => book.bookId == bookParamsId);
-  console.log(expectedBook);
 
   const {
     bookId,
@@ -28,6 +26,27 @@ const BookDetails = () => {
     publisher,
     yearOfPublishing,
   } = expectedBook;
+
+  const [storedBooks, setStoredBooks] = useState([]);
+
+  const handleMarkasRead = (currentBook) => {
+    // step 1: store book id
+    // step 2: where to store
+    // step 2: array or collection
+    // step 3: If the book is already exist then show a alert or toast
+    // step 4: if not then add the book in the array or collection
+    console.log(expectedBook, " ");
+
+    const isExistBook = storedBooks.find(
+      (book) => book.bookId === currentBook.bookId,
+    );
+
+    if (isExistBook) {
+      alert("The Book is already exist");
+    } else {
+      setStoredBooks([...storedBooks, currentBook]);
+    }
+  };
 
   return (
     <div className="mt-10 card lg:card-side bg-base-100 shadow-sm container mx-auto">
@@ -47,11 +66,9 @@ const BookDetails = () => {
           <div className="flex items-center gap-2">
             <span className="font-bold">Tags:</span>
             {tags.map((tag, index) => (
-              <>
-                <div key={index} className="badge badge-success badge-soft">
-                  {tag}
-                </div>
-              </>
+              <div key={index} className="badge badge-success badge-soft">
+                {tag}
+              </div>
             ))}
           </div>
         </div>
@@ -71,8 +88,13 @@ const BookDetails = () => {
         </p>
 
         <div className="card-actions">
-          <button className="btn btn-outline">Read</button>
-          <button className="btn btn-info">Wishlist</button>
+          <button
+            onClick={() => handleMarkasRead(expectedBook)}
+            className="btn btn-outline"
+          >
+            Mark as Read
+          </button>
+          <button className="btn btn-info">Add to Wishlist</button>
         </div>
       </div>
     </div>
