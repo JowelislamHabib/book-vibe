@@ -1,10 +1,14 @@
 import React from "react";
-import { LucideStamp, LucideStar } from "lucide-react";
+import { LucideStar } from "lucide-react";
+import { Link } from "react-router";
 
 const BookCard = ({ book }) => {
   return (
     <div>
-      <div className="card bg-base-100  shadow-sm">
+      <Link
+        to={`/bookDetails/${book.bookId}`}
+        className="card bg-base-100  shadow-sm"
+      >
         <figure className="p-6 bg-neutral-50">
           <img
             src={book.image}
@@ -31,7 +35,7 @@ const BookCard = ({ book }) => {
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
