@@ -1,21 +1,29 @@
 import React, { useContext } from "react";
 import { BookContext } from "../../context/BookContext";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
+import ReadList from "../../listedBooks/ReadList";
+import Wishlist from "../../listedBooks/Wishlist";
 
 const Books = () => {
   const { storedBooks, storeWishlist } = useContext(BookContext);
   console.log(storedBooks);
 
   return (
-    <div>
+    <div className="container mx-auto">
       <h1>this is books page</h1>
-      <button className="btn btn-primary">
-        {" "}
-        Read list ({storedBooks.length})
-      </button>
-      <button className="btn btn-Outline">
-        {" "}
-        Wishlist list ({storeWishlist.length})
-      </button>
+      <Tabs>
+        <TabList>
+          <Tab>Read List</Tab>
+          <Tab>Wishlist</Tab>
+        </TabList>
+        <TabPanel>
+          <ReadList />
+        </TabPanel>
+        <TabPanel>
+          <Wishlist />
+        </TabPanel>
+      </Tabs>
     </div>
   );
 };
